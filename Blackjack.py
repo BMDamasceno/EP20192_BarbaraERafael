@@ -34,3 +34,4 @@ baralho = {
 
 ListaPlayers = players()
 print (ValorDinheiro(ListaPlayers,APOSTAMINIMA))
+
