@@ -35,3 +35,15 @@ baralho = {
 ListaPlayers = players()
 print (ValorDinheiro(ListaPlayers,APOSTAMINIMA))
 
+n=0
+while n<2:
+    for p in ListaPlayers:
+        cartas=[]
+        Dealer=[]
+        cartas.append(baralho.pop(random.choice(baralho)))
+    Dealer.append(baralho.pop(random.choice(baralho)))
+    n+=1
+
+print("Dealer""\n",Dealer)
+for i in ListaPlayers:
+    print("{}""\n".format(ListaPlayers[i]),cartas[i])
