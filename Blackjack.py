@@ -1,4 +1,5 @@
 import random
+from collections import namedtuple
 
 APOSTAMINIMA = float(5)
 
@@ -25,13 +26,24 @@ def ValorDinheiro (listaplayers,ApostaMinima):
         i +=1
     return Player_Dinheiro
 
-baralho = {
-        '2':2, '3':3,'4':4,'5':5,'6':6,'7':7,'8':8, '9':9, '10':10,'Q': 10,'J': 10, 'K': 10, 'ÁS': 11,
-        '2':2, '3':3,'4':4,'5':5,'6':6,'7':7,'8':8, '9':9, '10':10,'Q': 10,'J': 10, 'K': 10, 'ÁS': 11,
-        '2':2, '3':3,'4':4,'5':5,'6':6,'7':7,'8':8, '9':9, '10':10,'Q': 10,'J': 10, 'K': 10, 'ÁS': 11,
-        '2':2, '3':3,'4':4,'5':5,'6':6,'7':7,'8':8, '9':9, '10':10,'Q': 10,'J': 10, 'K': 10, 'ÁS': 11
-        }
+Carta = namedtuple('Carta', ['face', 'naipe'])
 
+faces = {'A':11, '2':2, '3':3, '4':4, '5':5, '6':6, '7':7, '8':8, '9':9, '10':10, 'J':10, 'Q':10, 'K':10}
+naipes = {'Ouro', 'Paus', 'Copas', 'Espada'}
+baralho = []
+
+C=0
+while C<2:
+    for i in faces:
+        for n in naipes:
+            baralho.append([i,n])
+            random.shuffle(baralho)
+    baralho.append("Joker")
+    C+=1
+
+        
+ListaPlayers = players()
+print (ValorDinheiro(ListaPlayers,APOSTAMINIMA))
 ListaPlayers = players()
 print (ValorDinheiro(ListaPlayers,APOSTAMINIMA))
 
