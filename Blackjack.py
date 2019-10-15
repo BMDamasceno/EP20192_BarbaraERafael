@@ -25,6 +25,45 @@ def ValorDinheiro (listaplayers,ApostaMinima):
         Player_Dinheiro[listaplayers[i]] = carteira
         i +=1
     return Player_Dinheiro
+def Aposta (ListaComPlayers, PlayersEDinheiro):
+    PlayersComAposta = {}
+    
+    for jogadores in ListaComPlayers:
+        VAposta = int(input("{}, quanto você quer apostar?".format(jogadores)))
+        while (VAposta<0) or (VAposta>PlayersEDinheiro[jogadores]) or (VAposta<APOSTAMINIMA):
+            if VAposta < 0:
+                print ("Não é possível apostar um número negativo \n")
+                VAposta = int(input("{}, digite um valor positivo para apostar \n Aposta: R$ ".format(jogadores)))
+            elif VAposta > PlayersEDinheiro[jogadores]:
+                print ("Você não possui dinheiro suficiente. Aposte com outro valor \n")
+                VAposta = int(input("{}, digite um valor para apostar: R$ ".format(jogadores)))
+            elif VAposta<APOSTAMINIMA:
+                print ("Valor abaixo da aposta mínima \n")
+                VAposta = int(input("{}, digite um valor mais alto para a aposta \n Aposta: R$".format(jogadores)))
+            else:
+                PlayersComAposta[jogadores] = VAposta
+                PlayersEDinheiro[jogadores] = PlayersEDinheiro[jogadores] - VAposta
+                
+    return PlayersComAposta
+
+def DistribuiCartas (dealer, ApenasPlayers):
+    
+    
+    return 
+
+def SomaCartas(players, dealer, cartas): 
+    PlayersECartas = {}
+    
+    PlayersECartas[Dealer] = (int(dealer[0][0]) + int(dealer[1][0]))
+    for j in players:
+        soma = 0
+        i = 0
+        while i < len(players):
+            soma = soma + int(cartas[n][0]) + int(cartas[n+1][0]) 
+            i += 1
+        PlayersECartas[players[j]] = soma
+        
+    return PlayersECartas
 
 Carta = namedtuple('Carta', ['face', 'naipe'])
 
