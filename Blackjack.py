@@ -65,17 +65,34 @@ def Tirar2Cartas (ListaPlayers, baralho):
     return Dealer, PlayerComCartas
 
 
-def SomaCartas(players, dealer, cartas): 
-    PlayersECartas = {}
-    
-    PlayersECartas[Dealer] = (int(dealer[0][0]) + int(dealer[1][0]))
-    for j in players:
+def SomarCartasPrimeiraVez (ListaPlayers, MãoDealer, MãoJogadores):
+   
+    JogadorESuaSoma = {}
+    for jogadores in ListaPlayers:
         soma = 0
         i = 0
-        while i < len(players):
-            soma = soma + int(cartas[n][0]) + int(cartas[n+1][0]) 
+        while i < len(MãoJogadores[jogadores]):
+            if MãoJogadores[jogadores][i]=='K' or MãoJogadores[jogadores][i]=='Q' or MãoJogadores[jogadores][i]=='J':
+               soma +=10
+               i += 1
+            else:
+                valorcarta = float(MãoJogadores[jogadores][i])
+                soma += valorcarta
+                i += 1
+        JogadorESuaSoma[jogadores] = soma
+        
+    SomaDealer = 0
+    i = 0
+    while i < len(MãoDealer):
+        if MaoDealer[i]=='K' or MaoDealer[i]=='Q' or MaoDealer[i]=='J':
+            SomaDealer += 10
             i += 1
-        PlayersECartas[players[j]] = soma
+        else:
+            valor = float(MaoDealer[i])
+            SomaDealer += valor
+            i += 1
+        
+    return SomaDealer, JogadorESuaSoma
         
     return PlayersECartas
 def SomaDemaisRodadas (ListaPlayers, MãoJogadores, SomaJogadores):
@@ -94,26 +111,21 @@ def SomaDemaisRodadas (ListaPlayers, MãoJogadores, SomaJogadores):
         
         return SomaJogadores
 
-#Carta = namedtuple('Carta', ['face', 'naipe'])
 
-#faces = {'A':11, '2':2, '3':3, '4':4, '5':5, '6':6, '7':7, '8':8, '9':9, '10':10, 'J':10, 'Q':10, 'K':10}
-#naipes = {'Ouro', 'Paus', 'Copas', 'Espada'}
-#baralho = []
+#Lista com os nomes dos players        
+ListaPlayers = players()
 
-for i in faces:
-    for n in naipes:
-        baralho.append([i,n])
-random.shuffle(baralho)
-   
+NUMERODEBARALHOS  = int(input("Quantos baralhos o jogo terá?\n" ))
+    
 baralho=[
         2,3,4,5,6,7,8,9,10,'Q','J','K',
         2,3,4,5,6,7,8,9,10,'Q','J','K',
         2,3,4,5,6,7,8,9,10,'Q','J','K',
         2,3,4,5,6,7,8,9,10,'Q','J','K',
-        ]
+        ]*NUMERODEBARALHOS 
 
-#Lista com os nomes dos players        
-ListaPlayers = players()
+#Embaralhando o baralho
+random.shuffle(baralho)
 
 #Dicionario em que a chave corresponde ao nome do jogador e o valor é valor da carteira
 CarteiraEPlayer = ValorDinheiro(ListaPlayers,APOSTAMINIMA) 
@@ -132,14 +144,6 @@ print ("\n",MaoDealer)
 print (MaoJogadores)
 
 # Verificando se alguem ganhou na primeira rodada
-i = 0
-while i < len(ListaPlayers):
-    if PlayersESoma[ListaPlayers[i]] == 21:
-        ValorGanho = ApostaEPlayers[ListaPlayers[i]]*1.5
-        print ("Você ganhou de primeira! \n Ganhou R$ {}".format(ValorGanho))
-    else:
-        i += 1
-
  for jogador in ListaPlayers:
     if SomaMaoJogadores[jogador] == 21:
         ValorGanho = ApostaEPlayers[jogador]*1.5
