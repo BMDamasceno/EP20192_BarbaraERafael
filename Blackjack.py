@@ -99,10 +99,20 @@ def SomarCartasPrimeiraVez (ListaPlayers, MãoDealer, MãoJogadores):
             if MãoJogadores[jogadores][i]=='K' or MãoJogadores[jogadores][i]=='Q' or MãoJogadores[jogadores][i]=='J':
                soma +=10
                i += 1
+            elif MãoJogadores[jogadores][i]=='As':
+                soma += 11
+                i += 1
+            elif MãoJogadores[jogadores][i]=='Joker':
+                soma == 21
+                i += len(MãoJogadores[NomeJogador])
             else:
                 valorcarta = float(MãoJogadores[jogadores][i])
                 soma += valorcarta
                 i += 1
+        for carta in MãoJogadores[jogadores]:
+                if soma>21:
+                    if carta == 'As':
+                        soma -= 10
         JogadorESuaSoma[jogadores] = soma
         
     SomaDealer = 0
@@ -110,6 +120,12 @@ def SomarCartasPrimeiraVez (ListaPlayers, MãoDealer, MãoJogadores):
     while i < len(MãoDealer):
         if MaoDealer[i]=='K' or MaoDealer[i]=='Q' or MaoDealer[i]=='J':
             SomaDealer += 10
+            i += 1
+        elif MãoDealer[i]=='As':
+            SomaDealer += 11
+            i+=1
+        elif MãoDealer[i]=='Joker' or MãoDealer[i-1]=='Joker':
+            SomaDealer == 21
             i += 1
         else:
             valor = float(MaoDealer[i])
@@ -119,20 +135,32 @@ def SomarCartasPrimeiraVez (ListaPlayers, MãoDealer, MãoJogadores):
     return SomaDealer, JogadorESuaSoma
 
 
-def SomaDemaisRodadas (NomeJogador, MãoJogadores, SomaJogadores):
-    soma = 0
-    i = 0
-    while i < len(MãoJogadores[NomeJogador]):
-        if MãoJogadores[NomeJogador][i]=='K' or MãoJogadores[NomeJogador][i]=='Q' or MãoJogadores[NomeJogador][i]=='J':
-            soma +=10
-            i += 1
-        else:
-            valorcarta = float(MãoJogadores[NomeJogador][i])
-            soma += valorcarta
-            i += 1
-    SomaJogadores[NomeJogador] = soma
-        
-    return SomaJogadores
+def SomaDemaisRodadas (ListaPlayers, MãoJogadores, SomaJogadores):
+    for NomeJogador in ListaPlayers:
+        soma = 0
+        i = 0
+        while i < len(MãoJogadores[NomeJogador]):
+            if MãoJogadores[NomeJogador][i]=='K' or MãoJogadores[NomeJogador][i]=='Q' or MãoJogadores[NomeJogador][i]=='J':
+               soma +=10
+               i += 1
+            elif MãoJogadores[jogadores][i]=='As':
+                soma += 11
+                i+=1
+            elif MãoJogadores[jogadores][i]=='Joker':
+                soma == 21
+                i += len(MãoJogadores[NomeJogador])
+            else:
+                valorcarta = float(MãoJogadores[jogadores][i])
+                soma += valorcarta
+                i += 1
+        for carta in MãoJogadores[jogadores]:
+            if soma>21:
+                if carta == 'As':
+                    soma -= 10
+                    
+        SomaJogadores[NomeJogador] = soma
+
+        return SomaJogadores
 
 #Lista com os nomes dos players
 ListaPlayers = players()
@@ -140,10 +168,11 @@ ListaPlayers = players()
 NUMERODEBARALHOS  = int(input("Quantos baralhos o jogo terá?\n" ))
 
 baralho=[
-        2,3,4,5,6,7,8,9,10,'Q','J','K',
-        2,3,4,5,6,7,8,9,10,'Q','J','K',
-        2,3,4,5,6,7,8,9,10,'Q','J','K',
-        2,3,4,5,6,7,8,9,10,'Q','J','K',
+        2,3,4,5,6,7,8,9,10,'Q','J','K','As,
+        2,3,4,5,6,7,8,9,10,'Q','J','K','As,
+        2,3,4,5,6,7,8,9,10,'Q','J','K','As,
+        2,3,4,5,6,7,8,9,10,'Q','J','K','As',
+        'Joker','Joker
         ]*NUMERODEBARALHOS  
 
    
