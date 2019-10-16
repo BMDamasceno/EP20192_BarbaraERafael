@@ -124,3 +124,13 @@ while n<2:
 print("Dealer""\n",Dealer)
 for i in ListaPlayers:
     print("{}""\n".format(ListaPlayers[i]),cartas[i])
+    
+
+# Verificando se alguem ganhou na primeira rodada
+i = 0
+while i < len(ListaPlayers):
+    if PlayersESoma[ListaPlayers[i]] == 21:
+        ValorGanho = ApostaEPlayers[ListaPlayers[i]]*1.5
+        print ("Você ganhou de primeira! \n Ganhou R$ {}".format(ValorGanho))
+    else:
+        i += 1
