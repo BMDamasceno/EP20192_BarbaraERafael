@@ -65,20 +65,46 @@ def SomaCartas(players, dealer, cartas):
         
     return PlayersECartas
 
-Carta = namedtuple('Carta', ['face', 'naipe'])
+#Carta = namedtuple('Carta', ['face', 'naipe'])
 
-faces = {'A':11, '2':2, '3':3, '4':4, '5':5, '6':6, '7':7, '8':8, '9':9, '10':10, 'J':10, 'Q':10, 'K':10}
-naipes = {'Ouro', 'Paus', 'Copas', 'Espada'}
-baralho = []
+#faces = {'A':11, '2':2, '3':3, '4':4, '5':5, '6':6, '7':7, '8':8, '9':9, '10':10, 'J':10, 'Q':10, 'K':10}
+#naipes = {'Ouro', 'Paus', 'Copas', 'Espada'}
+#baralho = []
 
-C=0
-while C<2:
-    for i in faces:
-        for n in naipes:
-            baralho.append([i,n])
-            random.shuffle(baralho)
-    baralho.append("Joker")
-    C+=1
+for i in faces:
+    for n in naipes:
+        baralho.append([i,n])
+random.shuffle(baralho)
+   
+baralho=[
+        2,3,4,5,6,7,8,9,10,'Q','J','K',
+        2,3,4,5,6,7,8,9,10,'Q','J','K',
+        2,3,4,5,6,7,8,9,10,'Q','J','K',
+        2,3,4,5,6,7,8,9,10,'Q','J','K',
+        ]
+
+
+
+cartas = []
+Dealer=[]
+
+n=0
+while n<2:
+    for p in ListaPlayers:
+        C=baralho.pop()
+        cartas.append(C)
+        
+    Ct=baralho.pop()
+    Dealer.append(Ct)
+    n+=1
+    
+print("\n{}\n{}, {}".format(ListaPlayers[0],cartas[0],cartas[1]))
+n=1
+while n<len(ListaPlayers):
+    print("\n{}\n{}, {}".format(ListaPlayers[n],cartas[n+1],cartas[n+2])) 
+    n+=1
+    
+print ("\n", cartas)
 
         
 ListaPlayers = players()
