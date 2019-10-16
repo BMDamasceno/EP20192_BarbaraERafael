@@ -78,6 +78,21 @@ def SomaCartas(players, dealer, cartas):
         PlayersECartas[players[j]] = soma
         
     return PlayersECartas
+def SomaDemaisRodadas (ListaPlayers, MãoJogadores, SomaJogadores):
+    for NomeJogador in ListaPlayers:
+        soma = 0
+        i = 0
+        while i < len(MãoJogadores[NomeJogador]):
+            if MãoJogadores[NomeJogador][i]=='K' or MãoJogadores[NomeJogador][i]=='Q' or MãoJogadores[NomeJogador][i]=='J':
+               soma +=10
+               i += 1
+            else:
+                valorcarta = float(MãoJogadores[jogadores][i])
+                soma += valorcarta
+                i += 1
+        SomaJogadores[NomeJogador] = soma
+        
+        return SomaJogadores
 
 #Carta = namedtuple('Carta', ['face', 'naipe'])
 
@@ -124,3 +139,9 @@ while i < len(ListaPlayers):
         print ("Você ganhou de primeira! \n Ganhou R$ {}".format(ValorGanho))
     else:
         i += 1
+
+ for jogador in ListaPlayers:
+    if SomaMaoJogadores[jogador] == 21:
+        ValorGanho = ApostaEPlayers[jogador]*1.5
+        print ("\n {} ganhou o jogo e recebe R${}".format(jogador,ValorGanho))
+        ListaPlayers.remove(jogador)
