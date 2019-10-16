@@ -46,10 +46,21 @@ def Aposta (ListaComPlayers, PlayersEDinheiro):
                 
     return PlayersComAposta
 
-def DistribuiCartas (dealer, ApenasPlayers):
-    
-    
-    return 
+def Tirar2Cartas (ListaPlayers, baralho):
+    Dealer= []
+    PlayerComCartas = {}
+    n=0
+    for jogadores in ListaPlayers:
+        PlayerComCartas[jogadores] = [] 
+    while n<2:
+        for p in ListaPlayers:
+            C=baralho.pop()
+            PlayerComCartas[p].append(C)
+        Ct=baralho.pop()
+        Dealer.append(Ct)
+        n+=1
+    return Dealer, PlayerComCartas
+
 
 def SomaCartas(players, dealer, cartas): 
     PlayersECartas = {}
@@ -112,14 +123,20 @@ print (ValorDinheiro(ListaPlayers,APOSTAMINIMA))
 ListaPlayers = players()
 print (ValorDinheiro(ListaPlayers,APOSTAMINIMA))
 
-n=0
-while n<2:
-    for p in ListaPlayers:
-        cartas=[]
-        Dealer=[]
-        cartas.append(baralho.pop(random.choice(baralho)))
-    Dealer.append(baralho.pop(random.choice(baralho)))
-    n+=1
+def Tirar2Cartas (ListaPlayers, baralho):
+    Dealer= []
+    PlayerComCartas = {}
+    n=0
+    for jogadores in ListaPlayers:
+        PlayerComCartas[jogadores] = [] 
+    while n<2:
+        for p in ListaPlayers:
+            C=baralho.pop()
+            PlayerComCartas[p].append(C)
+        Ct=baralho.pop()
+        Dealer.append(Ct)
+        n+=1
+    return Dealer, PlayerComCartas
 
 print("Dealer""\n",Dealer)
 for i in ListaPlayers:
