@@ -123,21 +123,6 @@ print (ValorDinheiro(ListaPlayers,APOSTAMINIMA))
 ListaPlayers = players()
 print (ValorDinheiro(ListaPlayers,APOSTAMINIMA))
 
-def Tirar2Cartas (ListaPlayers, baralho):
-    Dealer= []
-    PlayerComCartas = {}
-    n=0
-    for jogadores in ListaPlayers:
-        PlayerComCartas[jogadores] = [] 
-    while n<2:
-        for p in ListaPlayers:
-            C=baralho.pop()
-            PlayerComCartas[p].append(C)
-        Ct=baralho.pop()
-        Dealer.append(Ct)
-        n+=1
-    return Dealer, PlayerComCartas
-
 print("Dealer""\n",Dealer)
 for i in ListaPlayers:
     print("{}""\n".format(ListaPlayers[i]),cartas[i])
