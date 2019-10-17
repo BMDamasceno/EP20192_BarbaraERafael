@@ -1,5 +1,4 @@
 import random
-from collections import namedtuple
 import time
 
 APOSTAMINIMA = int(5)
@@ -80,10 +79,20 @@ def SomarCartasPrimeiraVez (ListaPlayers, MãoDealer, MãoJogadores):
             if MãoJogadores[jogadores][i]=='K' or MãoJogadores[jogadores][i]=='Q' or MãoJogadores[jogadores][i]=='J':
                soma +=10
                i += 1
+            elif MãoJogadores[jogadores][i]=='As':
+                soma += 11
+                i += 1
+            elif MãoJogadores[jogadores][i]=='Joker':
+                soma == 21
+                i += len(MãoJogadores[jogadores])
             else:
-                valorcarta = int(MãoJogadores[jogadores][i])
+                valorcarta = float(MãoJogadores[jogadores][i])
                 soma += valorcarta
                 i += 1
+        for carta in MãoJogadores[jogadores]:
+                if soma>21:
+                    if carta == 'As':
+                        soma -= 10
         JogadorESuaSoma[jogadores] = soma
         
     SomaDealer = 0
@@ -92,12 +101,19 @@ def SomarCartasPrimeiraVez (ListaPlayers, MãoDealer, MãoJogadores):
         if MaoDealer[i]=='K' or MaoDealer[i]=='Q' or MaoDealer[i]=='J':
             SomaDealer += 10
             i += 1
+        elif MãoDealer[i]=='As':
+            SomaDealer += 11
+            i+=1
+        elif MãoDealer[i]=='Joker' or MãoDealer[i-1]=='Joker':
+            SomaDealer == 21
+            i += 1
         else:
-            valor = int(MaoDealer[i])
+            valor = float(MaoDealer[i])
             SomaDealer += valor
             i += 1
         
     return SomaDealer, JogadorESuaSoma
+
 
 def SomaDemaisRodadas (NomeJogador, MãoJogadores, SomaJogadores):
         soma = 0
@@ -126,18 +142,19 @@ def SomaDemaisRodadas (NomeJogador, MãoJogadores, SomaJogadores):
         return SomaJogadores
 
 
+
 #Lista com os nomes dos players
 ListaPlayers = players()
 
 NUMERODEBARALHOS  = int(input("\nQuantos baralhos o jogo terá?\n" ))
 
 baralho=[
-        2,3,4,5,6,7,8,9,10,'Q','J','K',
-        2,3,4,5,6,7,8,9,10,'Q','J','K',
-        2,3,4,5,6,7,8,9,10,'Q','J','K',
-        2,3,4,5,6,7,8,9,10,'Q','J','K',
-        ]*NUMERODEBARALHOS  
-
+        2,3,4,5,6,7,8,9,10,'Q','J','K','As',
+        2,3,4,5,6,7,8,9,10,'Q','J','K','As',
+        2,3,4,5,6,7,8,9,10,'Q','J','K','As',
+        2,3,4,5,6,7,8,9,10,'Q','J','K','As',
+        'Joker','Joker'
+        ]*NUMERODEBARALHOS 
    
 #Embaralhando o baralho
 random.shuffle(baralho)
@@ -160,8 +177,8 @@ while JogoRodando == "sim":
         VAposta = int(input("\n{}, quanto você quer apostar?".format(jogadores)))
         if VAposta == "fim":
             JogoRodando = "parar"
-        else:    
-            while (VAposta<0) or (VAposta>CarteiraEPlayer[jogadores][0]) or (VAposta<APOSTAMINIMA) or VAposta!='fim':
+        elif VAposta != 'fim' and type(VAposta)!=int:   
+            while (VAposta<0) or (VAposta>=CarteiraEPlayer[jogadores][0]) or (VAposta<APOSTAMINIMA) or VAposta!='fim':
                 if VAposta < 0:
                     print ("\nNão é possível apostar um número negativo \n")
                     VAposta = int(input("{}, digite um valor positivo para apostar \n Aposta: R$ ".format(jogadores)))
@@ -173,6 +190,8 @@ while JogoRodando == "sim":
                     VAposta = int(input("\n{}, digite um valor mais alto para a aposta \n Aposta: R$".format(jogadores)))
                 elif VAposta == "fim":
                     JogoRodando = "parar"
+                else:
+                    VAposta
             
         ApostaEPlayers[jogadores] = VAposta
 #        ValorNovoCarteira = CarteiraEPlayer[jogadores][0]
@@ -183,7 +202,7 @@ while JogoRodando == "sim":
     MaoDealer = Tirar2Cartas(ListaPlayers, baralho)[0]
     MaoJogadores = Tirar2Cartas(ListaPlayers, baralho)[1]
  
-    print ("\nA mão do Dealer é: \n",MaoDealer)
+   # print ("\nA mão do Dealer é: \n",MaoDealer)
     print (MaoJogadores)
 
 
@@ -214,6 +233,9 @@ while JogoRodando == "sim":
             time.sleep(3)
             exit()
             JogoRodando = "parar"
+        for i in MaoJogadores.values():
+            if i== 'Joker':
+                continua='não'
         while continua != "não":  
         
             if continua == "sim":
@@ -290,6 +312,3 @@ while JogoRodando == "sim":
     while respostaJogarDeNovo!="sim" and respostaJogarDeNovo!="não":
          respostaJogarDeNovo = input("\nJogar novamente?\n")
     JogoRodando = respostaJogarDeNovo
-
-        
-        
